@@ -1,4 +1,4 @@
-﻿// OOP_1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// OOP_1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
@@ -118,20 +118,30 @@ public:
 };
 
 istream& operator >> (istream& cin, ElektricKettle& k) {
+      
+    char* brand=new char;//бренд
+    string model;//модель
+    string color;//цвет
+    int price;//цена
+
     cout << "Enter the characteristics of the electric kettle!\n";
     cout << "Brand: \n";
-    cin >> k.SetBrand("Tefal");
+    cin >> brand;
+    k.SetBrand(brand);
     cout << "Model: \n";
-    cin >> k.SetModel("456pp");
+    cin >> model;
+    k.SetModel(model);
     cout << "Color: \n";
-    cin >> k.SetColor("Red");
+    cin >> color;
+    k.SetColor(color);
     cout << "Price: \n";
-    cin >> k.SetPrice(1300);
+    cin >> price;
+    k.SetPrice(price);
     return cin;
 }
 
 ostream& operator << (ostream& cout, const ElektricKettle& k) {
-    cout << "\n\nBrand: " << k.GetBrand() << "\n";
+    cout << "Brand: " << k.GetBrand() << "\n";
     cout << "Model: " << k.GetModel() << "\n";
     cout << "Color: " << k.GetColor() << "\n";
     cout << "Price: " << k.GetPrice() << "\n";
@@ -161,7 +171,7 @@ ElektricKettle operator + (const ElektricKettle& left, const ElektricKettle& rig
     return result;
 }
 */
-/*
+
 class Book {
     string genre;//жанр
     string author;//автор
@@ -278,17 +288,72 @@ public:
         else
             cout << "Old book!" << year << "\n\n";
     }
+
 };
-*/
+
+istream& operator >> (istream& cin, Book& b) {
+
+    string genre;//жанр
+    string author;//автор
+    char* name=new char;//название книги
+    int year;//год выпуска
+    int count_page;//количество страниц
+
+    cout << "Enter the book!\n";
+    cout << "Genre: \n";
+    cin >> genre;
+    b.SetGenre(genre);
+    cout << "Author: \n";
+    cin >> author;
+    b.SetAuthor(author);
+    cout << "Name of the book: \n";
+    cin >> name;
+    b.SetName(name);
+    cout << "Year: \n";
+    cin >> year;
+    b.SetYear(year);
+    cout << "Count page: \n";
+    cin >> count_page;
+    b.SetCountPage(count_page);
+    return cin;
+}
+
+ostream& operator << (ostream& cout, const Book& b) {
+    cout << "Author: " << b.GetAuthor() << "\n";
+    cout << "Name: " << b.GetName() << "\n";
+    cout << "Genre: " << b.GetGenre() << "\n";
+    cout << "Year: " << b.GetYear() << "\n";
+    cout << "Count pages: " << b.GetCountPage() << "\n";
+    return cout;
+}
+
+bool operator < (const Book& left, const Book& right) {
+    if (left.GetCountPage() < right.GetCountPage()) return true;
+    else return false;
+}
+
+bool operator > (const Book& left, const Book& right) {
+    if (left.GetCountPage() > right.GetCountPage()) return true;
+    else return false;
+}
+
 
 int main()
 {
     ElektricKettle k;
     ElektricKettle k1("Delongi", "10WE", 3600);
 
+    cin >> k >> k1;
+
+    cout << k << "\n" << k1;
+
+    cout << k * 2 << "\n";
+
+    cout << k + k1 << "\n";
+
     k.GetPrice();
     k1.GetPrice();
-    if (k < k1) {
+    if (k > k1) {
         cout << "\nThe first electric kettle is cheaper \n\n";
     }
     else {
@@ -296,13 +361,29 @@ int main()
     }
 
 
-    cin >> k >> k1;
+    cout << "======================== \n";
 
-    cout << k << k1;
 
-    cout << k * 2;
+    Book b;
+    Book b1("Pillars of the Earth", "Ken Follett", 1989, 230);
 
-    cout << k + k1;
+    cin >> b >> b1;
+
+    cout << b << "\n" << b1;
+
+    b.GetCountPage();
+    b1.GetCountPage();
+
+    if (b > b1) {
+        cout << "\nThe first book contains more sheets \n\n";
+    }
+    else {
+        cout << "\nThe second book contains more sheets \n\n";
+    }
+
+
+   
+
 
     /*
     ElektricKettle k;
@@ -318,7 +399,7 @@ int main()
     cout << "\n\n";
 
 
-
+    
     Book b;
     b.PrintBook();
     cout << "\n\n";
