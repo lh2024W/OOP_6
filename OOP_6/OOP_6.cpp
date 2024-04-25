@@ -102,19 +102,6 @@ public:
         result.price = this -> price + right.price;
          return result;
     }
-
-    istream& operator >> (ElektricKettle& k) {
-        cout << "Enter the characteristics of the electric kettle!\n";
-        cout << "Brand: \n";
-        cin >> k.brand;
-        cout << "Model: \n";
-        cin >> k.model;
-        cout << "Color: \n";
-        cin >> k.color;
-        cout << "Price: \n";
-        cin >> k.price;
-        return cin;
-    }
 };
 
 istream& operator >> (istream& cin, ElektricKettle& k) {
